@@ -32,3 +32,29 @@ print("Dew point: "+ str(si.dew_point()) + " deg C")
 t_ambient = 24.4
 print("Humidity Ambient for " + str(t_ambient) + " deg C is " + str(si.humid_ambient(t_ambient)) + "%RH")
 
+#done by christy
+lt = LTR329ALS01(py)
+print("Light (channel Blue lux, channel Red lux): " + str(lt.light()))
+
+li = LIS2HH12(py)
+print("Acceleration: " + str(li.acceleration()))
+print("Roll: " + str(li.roll()))
+print("Pitch: " + str(li.pitch()))
+
+# set your battery voltage limits here
+vmax = 4.2
+vmin = 3.3
+battery_voltage = py.read_battery_voltage()
+battery_percentage = (battery_voltage - vmin / (vmax - vmin))*100
+print("Battery voltage: " + str(py.read_battery_voltage()), " percentage: ", battery_percentage)
+if(pybytes_enabled):
+    pybytes.send_signal(1, mpp.pressure())
+    pybytes.send_signal(2, si.temperature())
+    pybytes.send_signal(3, lt.light())
+    pybytes.send_signal(4, li.acceleration())
+    pybytes.send_battery_level(int(battery_percentage))
+    print("Sent data to pybytes")
+
+time.sleep(5)
+py.setup_sleep(10)
+py.go_to_sleep()
