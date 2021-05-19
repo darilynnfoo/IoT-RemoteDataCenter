@@ -15,7 +15,7 @@ print(wlan.ifconfig(id=1)) #id =1 signifies the AP interface
 
 wlan = WLAN(mode=WLAN.STA)
 
-wlan.connect(ssid='suriya', auth=(WLAN.WPA2, 'jaya123suriya456'))
+wlan.connect(ssid='Blk 805', auth=(WLAN.WPA2, 'Theju123'))
 while not wlan.isconnected():
     machine.idle()
 print("WiFi connected succesfully")
@@ -28,9 +28,9 @@ wlan = WLAN(mode=WLAN.STA)
 
 nets = wlan.scan()
 for net in nets:
-    if net.ssid == 'suriya':
+    if net.ssid == 'Blk 805':
         print('Network found!')
-        wlan.connect(net.ssid, auth=(net.sec, 'jaya123suriya456'), timeout=5000)
+        wlan.connect(net.ssid, auth=(net.sec, 'Theju123'), timeout=5000)
         while not wlan.isconnected():
             machine.idle() # save power while waiting
         print('WLAN connection succeeded!')
