@@ -1,4 +1,4 @@
-# Done by Jaya
+
 import time
 import pycom
 from pycoproc_1 import Pycoproc
@@ -10,14 +10,14 @@ from LTR329ALS01 import LTR329ALS01
 from MPL3115A2 import MPL3115A2,ALTITUDE,PRESSURE
 
 pycom.heartbeat(False)
-pycom.rgbled(0xFF0000) # Red
+pycom.rgbled(0x00FF00) # green
 
 py = Pycoproc(Pycoproc.PYSENSE)
 
 pybytes_enabled = False
 if 'pybytes' in globals():
     if(pybytes.isconnected()):
-        print('Pybytes is connected, sending signals to Pybytes')
+        print('Pybytes is connected and it is sending signals to Pybytes')
         pybytes_enabled = True
 
 mp = MPL3115A2(py,mode=ALTITUDE) # Returns height in meters. Mode may also be set to PRESSURE, returning a value in Pascals
@@ -32,7 +32,7 @@ print("Dew point: "+ str(si.dew_point()) + " deg C")
 t_ambient = 24.4
 print("Humidity Ambient for " + str(t_ambient) + " deg C is " + str(si.humid_ambient(t_ambient)) + "%RH")
 
-#done by christy
+
 lt = LTR329ALS01(py)
 print("Light (channel Blue lux, channel Red lux): " + str(lt.light()))
 
