@@ -14,11 +14,15 @@ print(wlan.ifconfig(id=1)) #id =1 signifies the AP interface
 
 wlan = WLAN(mode=WLAN.STA)
 
+<<<<<<< HEAD:IoT-RemoteDataCenter/WLAN.py
 <<<<<<< HEAD
 wlan.connect(ssid='FooFamily', auth=(WLAN.WPA2, 'Foofam0212'))
 =======
 wlan.connect(ssid='suriya', auth=(WLAN.WPA2, 'jaya123suriya456'))
 >>>>>>> 4d6e722e5430c527f343113f70c01f39a86d697e
+=======
+wlan.connect(ssid='Blk 805', auth=(WLAN.WPA2, 'Theju123'))
+>>>>>>> 7a8ae6938afd6074dc06fc4f781d8f4319e4691c:RGB-Blink/WLAN.py
 while not wlan.isconnected():
     machine.idle()
 print("WiFi connected succesfully!")
@@ -53,9 +57,9 @@ wlan = WLAN(mode=WLAN.STA)
 
 nets = wlan.scan()
 for net in nets:
-    if net.ssid == 'suriya':
+    if net.ssid == 'Blk 805':
         print('Network found!')
-        wlan.connect(net.ssid, auth=(net.sec, 'jaya123suriya456'), timeout=5000)
+        wlan.connect(net.ssid, auth=(net.sec, 'Theju123'), timeout=5000)
         while not wlan.isconnected():
             machine.idle() # save power while waiting
         print('WLAN connection succeeded!')
