@@ -1,34 +1,30 @@
-from network import WLAN
-import time
-import pycom
-from umqtt import MQTTClient
-import ubinascii
-import machine
-import micropython
+# https://github.com/micropython/micropython-lib/blob/master/umqtt.simple/example_sub_led.py
 
-from pysense import Pysense
-from SI7006A20 import SI7006A20
-from LTR329ALS01 import LTR329ALS01
+from network import WLAN      # For operation of WiFi network
+import time                   # Allows use of time.sleep() for delays
+import pycom                  # Base library for Pycom devices
+from umqtt import MQTTClient  # For use of MQTT protocol to talk to Adafruit IO
+import ubinascii              # Needed to run any MicroPython code
+import machine                # Interfaces with hardware components
+import micropython            # Needed to run any MicroPython code
 
-#BEGIN SETTINGS
-RANDOMS_INTERVAL = 5000  #Milliseconds
-last_random_sent_ticks = 0 #milliseconds
+# BEGIN SETTINGS
+# These need to be change to suit your environment
+RANDOMS_INTERVAL = 5000 # milliseconds
+last_random_sent_ticks = 0  # milliseconds
 
-#wifi
-WIFI_SSID="Blk 805"
-WIFI_PASS="Theju123"
+# Wireless network
+WIFI_SSID = "Blk 805"
+WIFI_PASS = "Theju123" # No this is not our regular password. :)
 
-#Adafruit IO(AIO)Configuration
+# Adafruit IO (AIO) configuration
 AIO_SERVER = "io.adafruit.com"
-AIO_PORT=1883
-AIO_USER="Corechristy"
-AIO_KEY = "7b2d0601a9694589a52fb2d614122cff"
-AIO_CLIENT_ID= ubinascii.hexlify(machine.unique_id())
-AIO_CONTROL_FEED="Corechristy/feeds/lights"
-AIO_RANDOMS_FEED="Corechisty/feeds/randoms"
-AIO_FEEDS= {'temp':'Corechristy/feeds/temperature','humi':'Corechristy/feeds/humidity'}
-
-do_temp = True
+AIO_PORT = 1883
+AIO_USER = "Corechristy"
+AIO_KEY = "aio_dQrN28NUyYbGadKNbj3q6yePB75B"
+AIO_CLIENT_ID = ubinascii.hexlify(machine.unique_id())  # Can be anything
+AIO_CONTROL_FEED = "Corechristy/feeds/lights"
+AIO_RANDOMS_FEED = "Corechristy/feeds/randoms"
 
 # END SETTINGS
 
@@ -43,7 +39,7 @@ pycom.rgbled(0xff0000)  # Status red = not working
 
 # WIFI
 # We need to have a connection to WiFi for Internet access
-
+# Code source: https://docs.pycom.io/chapter/tutorials/all/wlan.html
 
 wlan = WLAN(mode=WLAN.STA)
 wlan.connect(WIFI_SSID, auth=(WLAN.WPA2, WIFI_PASS), timeout=5000)
